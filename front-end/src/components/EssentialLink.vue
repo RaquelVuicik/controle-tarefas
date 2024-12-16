@@ -29,6 +29,11 @@ export default defineComponent({
       required: true
     },
 
+    caption: {
+      type: String,
+      default: ''
+    },
+
     route: {
       type: String,
       default: ''
