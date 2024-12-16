@@ -18,7 +18,7 @@ class UserController extends Controller
         $dados = $request->all();
         $user = User::create($dados);
 
-        return response()->json($user, Response::HTTP_CREATED);        
+        return response()->json($user, Response::HTTP_CREATED);
     }
 
     public function show(int $id)
@@ -47,5 +47,4 @@ class UserController extends Controller
 
         return response()->json($user);
     }
-
 }

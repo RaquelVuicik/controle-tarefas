@@ -66,6 +66,11 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
+    title: 'Home',
+    icon: 'home',
+    route: 'home'
+  },  
+  {
     title: 'Cadastrar Usuário',
     icon: 'person',
     route: 'create'
