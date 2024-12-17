@@ -21,6 +21,13 @@ const routes = [
       { path: 'update', name: 'update', component: () => import('pages/usuario/update.vue') },
     ]
   },
+  {
+    path: '/exemplo',
+    component: () => import('layouts/CreateUsuario.vue'),
+    children: [
+      { path: 'computed', name: 'computed', component: () => import('pages/exemplo/Computed.vue') },
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it
