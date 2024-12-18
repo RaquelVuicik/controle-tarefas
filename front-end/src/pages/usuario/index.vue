@@ -1,15 +1,37 @@
 <template>
-  <q-page class="flex flex-center">
-    <q-table
-      flat bordered
-      title="Usuários"
-      :rows="usuarios"
-      :columns="columns"
-      row-key="name"
-      :selected-rows-label="getSelectedString"
-      selection="multiple"
-      v-model:selected="selected"
-    />
+  <q-page class="flex-inline flex-column">
+    <div class="justify-center">
+      <div class="row items-center q-ma-lg">
+        <q-btn
+          class="col-12"
+          color="deep-purple-6"
+          label="Cadastrar Usuário"
+          push
+          size="lg"
+          :to="{name: 'batata'}"
+        />
+      </div>
+      <div class="q-mx-lg q-mb-lg">
+        <q-table
+          flat bordered
+          title="Usuários"
+          :rows="usuarios"
+          :columns="columns"
+          row-key="name"
+          :selected-rows-label="getSelectedString"
+          selection="multiple"
+          v-model:selected="selected"
+        >
+        <template v-slot:body-cell-actions="props">
+          <q-td :props="props">
+            <!-- <pre>{{props.row}}</pre> -->
+            <q-btn icon="mode_edit" :to="`/usuario/update/${props.row.id}`"></q-btn>
+            <q-btn icon="delete" @click="deletarUsuario(props.row.id)"></q-btn>
+          </q-td>
+        </template>
+        </q-table>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -50,6 +72,12 @@ export default defineComponent({
           format: val => `${val}`,
           sortable: true
         },
+        {
+          name: 'actions',
+          label: 'Ações',
+          align: 'center',
+          field: 'actions',
+        },
       ]
     }
   },
@@ -66,7 +94,20 @@ export default defineComponent({
     },
     getSelectedString () {
       return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.usuarios.length}`
+    },
+    deletarUsuario (id) {
+      // this.$q.loading.show()
+      this.$api.delete(`/user/${id}`)
+      .then(() => {
+        this.listarUsuarios()
+      })
+      .catch(() => {
+        alert('Deu errado!')
+      })
+      .finally(() => {
+        // this.$q.loading.hide()
+      })
     }
-  }
+  },
 });
 </script>
