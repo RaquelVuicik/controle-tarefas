@@ -42,6 +42,7 @@
       <q-list>
         <q-item-label
           header
+
         >
           Links Essenciais
         </q-item-label>
@@ -70,11 +71,6 @@ const linksList = [
     icon: 'person',
     route: 'create'
   },
-  {
-    title: 'Alterar Usuário',
-    icon: 'edit',
-    route: 'update'
-  }
 ]
 
 export default defineComponent({

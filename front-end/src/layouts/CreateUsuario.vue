@@ -75,11 +75,6 @@ const linksList = [
     icon: 'person',
     route: 'create'
   },
-  {
-    title: 'Alterar Usuário',
-    icon: 'edit',
-    route: 'update'
-  }
 ]
 
 export default defineComponent({

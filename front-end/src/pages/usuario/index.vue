@@ -8,7 +8,7 @@
           label="Cadastrar Usuário"
           push
           size="lg"
-          :to="{name: 'batata'}"
+          :to="{name: 'create'}"
         />
       </div>
       <div class="q-mx-lg q-mb-lg">
@@ -26,10 +26,23 @@
           <q-td :props="props">
             <!-- <pre>{{props.row}}</pre> -->
             <q-btn icon="mode_edit" :to="`/usuario/update/${props.row.id}`"></q-btn>
-            <q-btn icon="delete" @click="deletarUsuario(props.row.id)"></q-btn>
+            <q-btn icon="delete" @click="confirm = true, idSelecionadoParaDeletar = props.row.id"></q-btn>
           </q-td>
         </template>
         </q-table>
+        <q-dialog v-model="confirm" persistent>
+          <q-card>
+            <q-card-section class="row items-center">
+              <q-avatar icon="warning" color="deep-purple-6" text-color="white" />
+              <span class="q-ml-sm">Você tem certeza que quer excluir esse cadastro?</span>
+            </q-card-section>
+
+            <q-card-actions align="right">
+              <q-btn flat label="Cancelar" color="deep-purple-6" v-close-popup />
+              <q-btn flat label="Excluir" color="deep-purple-6" @click="deletarUsuario(idSelecionadoParaDeletar)" v-close-popup />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </div>
     </div>
   </q-page>
@@ -42,6 +55,8 @@ export default defineComponent({
   name: 'IndexPage',
   data () {
     return {
+      idSelecionadoParaDeletar: null,
+      confirm: false,
       usuarios: [],
       selected: [],
       columns: [
@@ -96,7 +111,7 @@ export default defineComponent({
       return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.usuarios.length}`
     },
     deletarUsuario (id) {
-      // this.$q.loading.show()
+      this.$q.loading.show()
       this.$api.delete(`/user/${id}`)
       .then(() => {
         this.listarUsuarios()
@@ -105,7 +120,7 @@ export default defineComponent({
         alert('Deu errado!')
       })
       .finally(() => {
-        // this.$q.loading.hide()
+        this.$q.loading.hide()
       })
     }
   },
