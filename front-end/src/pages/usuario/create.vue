@@ -40,7 +40,7 @@
         </q-input>
         <q-select
           outlined
-          v-model="form.nivelPermissao"
+          v-model="form.nivel_permissao"
           :options="optionsNivelPermissao"
           label="Nível de Permissão"
           class="col-md-12 col-sm-12 col-xs-12"
@@ -101,7 +101,7 @@ export default {
       form: {
         name: '',
         email: '',
-        nivelPermissao: '',
+        nivel_permissao: '',
         password: '',
       },
       optionsNivelPermissao: [
@@ -130,7 +130,7 @@ export default {
       this.form = {
         nome: '',
         email: '',
-        nivelPermissao: '',
+        nivel_permissao: '',
       }
     },
   }
